@@ -1,0 +1,350 @@
+/* -------------------------------------------------------------
+ * TASKS VIEW STYLES - FocusFlow AI
+ * Toolbar controls, search wrappers, list items, category tags,
+ * subtask dropdowns, and the 2x2 Eisenhower matrix.
+ * ------------------------------------------------------------- */
+.tasks-layout {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+/* Toolbar Control Bar */
+.tasks-toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  background-color: var(--bg-secondary);
+  padding: 16px 24px;
+  border-radius: var(--border-radius-lg);
+  border: 1px solid var(--border-color);
+}
+.search-filter-group {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-grow: 1;
+}
+.search-wrapper {
+  position: relative;
+  flex-grow: 1;
+  max-width: 400px;
+}
+.search-icon {
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 16px;
+  height: 16px;
+  color: var(--text-slate);
+}
+.search-wrapper input {
+  width: 100%;
+  padding-left: 42px;
+}
+.action-group {
+  display: flex;
+  gap: 12px;
+}
+/* Tab Switching Header */
+.tabs-navigation {
+  display: flex;
+  gap: 8px;
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 8px;
+}
+.tab-btn {
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  font-family: var(--font-display);
+  font-size: 15px;
+  font-weight: 600;
+  padding: 8px 16px;
+  cursor: pointer;
+  position: relative;
+  transition: var(--transition-smooth);
+}
+.tab-btn:hover {
+  color: var(--text-white);
+}
+.tab-btn.active {
+  color: var(--color-cyan);
+}
+.tab-btn.active::after {
+  content: "";
+  position: absolute;
+  bottom: -9px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, var(--color-cyan), var(--color-violet));
+}
+/* Tab panes */
+.tab-pane {
+  display: none;
+}
+.tab-pane.active-pane {
+  display: block;
+}
+/* Task lists layout */
+.task-sections {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+.section-title {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--text-white);
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.tasks-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+/* Task Cards */
+.task-card {
+  background-color: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius);
+  padding: 16px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  transition: var(--transition-smooth);
+}
+.task-card:hover {
+  border-color: var(--border-color-hover);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+.task-card-main {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  width: 100%;
+}
+.task-card-left {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  flex-grow: 1;
+}
+.task-checkbox-wrapper {
+  margin-top: 2px;
+}
+.task-checkbox {
+  width: 18px;
+  height: 18px;
+  border-radius: 4px;
+  border: 2px solid var(--text-slate);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: var(--transition-smooth);
+}
+.task-checkbox.completed {
+  background-color: var(--color-emerald);
+  border-color: var(--color-emerald);
+}
+.task-checkbox i {
+  width: 12px;
+  height: 12px;
+  color: var(--text-white);
+  display: none;
+}
+.task-checkbox.completed i {
+  display: block;
+}
+.task-card-details {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.task-title {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text-white);
+  line-height: 1.4;
+}
+.task-title.completed {
+  color: var(--text-slate);
+  text-decoration: line-through;
+}
+.task-notes {
+  font-size: 13px;
+  color: var(--text-muted);
+  line-height: 1.4;
+}
+.task-meta-row {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 4px;
+}
+.task-meta-item {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 12px;
+  color: var(--text-muted);
+}
+.task-meta-item i {
+  width: 13px;
+  height: 13px;
+}
+.task-card-actions {
+  display: flex;
+  gap: 6px;
+}
+/* Decompose drawer button */
+.btn-decompose {
+  background-color: rgba(139, 92, 246, 0.1);
+  color: var(--color-violet);
+  border: 1px solid rgba(139, 92, 246, 0.2);
+}
+.btn-decompose:hover {
+  background-color: rgba(139, 92, 246, 0.2);
+}
+/* Nested Subtasks checklist panel */
+.subtasks-panel {
+  border-top: 1px solid var(--border-color);
+  padding-top: 12px;
+  margin-top: 4px;
+}
+.subtasks-title {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--text-slate);
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+.subtask-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 6px 0;
+  font-size: 13px;
+}
+.subtask-item.completed {
+  color: var(--text-slate);
+  text-decoration: line-through;
+}
+.subtask-checkbox {
+  width: 14px;
+  height: 14px;
+  border-radius: 3px;
+  border: 1.5px solid var(--text-slate);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: var(--transition-smooth);
+}
+.subtask-checkbox.completed {
+  background-color: var(--color-cyan);
+  border-color: var(--color-cyan);
+}
+.subtask-checkbox i {
+  width: 10px;
+  height: 10px;
+  color: var(--text-white);
+  display: none;
+}
+.subtask-checkbox.completed i {
+  display: block;
+}
+/* Eisenhower Matrix Quadrants (2x2 Grid) */
+.matrix-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+  min-height: 580px;
+}
+.matrix-quadrant {
+  background-color: var(--bg-card);
+  backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius-lg);
+  display: flex;
+  flex-direction: column;
+  height: 350px;
+  overflow: hidden;
+  transition: var(--transition-smooth);
+}
+.matrix-quadrant:hover {
+  border-color: var(--border-color-hover);
+}
+.quadrant-header {
+  padding: 14px 20px;
+  border-bottom: 1px solid var(--border-color);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 13px;
+  letter-spacing: 0.05em;
+  background-color: rgba(8, 12, 20, 0.4);
+}
+.bg-rose-trans { background-color: rgba(244, 63, 94, 0.1); }
+.bg-indigo-trans { background-color: rgba(139, 92, 246, 0.1); }
+.bg-cyan-trans { background-color: rgba(6, 182, 212, 0.1); }
+.bg-slate-trans { background-color: rgba(100, 116, 139, 0.1); }
+.quadrant-body {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  overflow-y: auto;
+  flex-grow: 1;
+}
+/* Micro-cards in Matrix Quadrants */
+.matrix-mini-card {
+  background-color: rgba(15, 23, 42, 0.6);
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius);
+  padding: 10px 14px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  font-size: 13px;
+  transition: var(--transition-smooth);
+}
+.matrix-mini-card:hover {
+  border-color: rgba(99, 102, 241, 0.3);
+  transform: translateX(2px);
+}
+.matrix-mini-title {
+  font-weight: 500;
+  color: var(--text-white);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.matrix-mini-title.completed {
+  color: var(--text-slate);
+  text-decoration: line-through;
+}
+.matrix-mini-date {
+  font-size: 11px;
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+/* Responsive adjustment */
+@media (max-width: 768px) {
+  .matrix-grid {
+    grid-template-columns: 1fr;
+  }
+}
+.font-bold { font-weight: 700; }
+.font-medium { font-weight: 500; }
+.gap-2 { gap: 8px; }
+.flex-row { display: flex; flex-direction: row; }
+.align-center { align-items: center; }

@@ -1,0 +1,253 @@
+/* -------------------------------------------------------------
+ * FOCUS MODE & POMODORO STYLES - FocusFlow AI
+ * Pomodoro dials, radial timer bars, soundscape sliders,
+ * and fullscreen distraction-free ambient overlays.
+ * ------------------------------------------------------------- */
+.focus-mode-container {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 24px;
+}
+/* Pomodoro Timer Card */
+.focus-timer-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 32px;
+}
+.pomodoro-tabs {
+  display: flex;
+  background-color: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  padding: 4px;
+  border-radius: 20px;
+  margin-bottom: 32px;
+}
+.pomodoro-tab-btn {
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  font-size: 12px;
+  font-weight: 600;
+  padding: 8px 16px;
+  border-radius: 16px;
+  cursor: pointer;
+  transition: var(--transition-smooth);
+}
+.pomodoro-tab-btn.active {
+  background: linear-gradient(135deg, var(--color-cyan), var(--color-violet));
+  color: var(--text-white);
+  box-shadow: 0 4px 10px rgba(139, 92, 246, 0.25);
+}
+/* Radial Timer Display */
+.timer-display {
+  position: relative;
+  width: 260px;
+  height: 260px;
+  margin-bottom: 32px;
+}
+.timer-ring-bg {
+  stroke-dasharray: 691.15;
+  stroke-dashoffset: 0;
+}
+.timer-ring-active {
+  stroke-dasharray: 691.15;
+  stroke-dashoffset: 0;
+  transform: rotate(-90deg);
+  transform-origin: 50% 50%;
+  transition: stroke-dashoffset 0.1s linear;
+}
+.timer-text-overlay {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+#timer-time-left {
+  font-family: var(--font-display);
+  font-size: 48px;
+  font-weight: 800;
+  color: var(--text-white);
+  letter-spacing: -0.02em;
+}
+#timer-status-label {
+  font-size: 12px;
+  text-transform: uppercase;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  margin-top: 4px;
+}
+.timer-controls-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+/* Synthesized Soundscape Controls */
+.focus-sound-card {
+  display: flex;
+  flex-direction: column;
+}
+.focus-sound-card .description {
+  font-size: 13px;
+  color: var(--text-muted);
+  line-height: 1.5;
+  margin-bottom: 20px;
+}
+.soundscape-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+.soundscape-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px;
+  background-color: rgba(15, 23, 42, 0.4);
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius-lg);
+  gap: 16px;
+}
+.soundscape-details {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+.soundscape-details .title {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-white);
+}
+.soundscape-details .subtitle {
+  font-size: 11px;
+  color: var(--text-slate);
+  margin-top: 2px;
+}
+.soundscape-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+/* Sound volume slider ranges */
+.sound-volume {
+  width: 80px;
+  accent-color: var(--color-cyan);
+  cursor: pointer;
+}
+.audio-notice {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px;
+  border-radius: var(--border-radius);
+  background-color: rgba(6, 182, 212, 0.05);
+  border: 1px solid rgba(6, 182, 212, 0.15);
+  font-size: 11px;
+  color: var(--text-muted);
+  margin-top: auto;
+}
+.audio-notice i {
+  flex-shrink: 0;
+}
+/* FULLSCREEN FOCUS OVERLAY */
+.fullscreen-focus-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: #030712;
+  z-index: 200;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  animation: fadeIn 0.4s ease-out;
+}
+.overlay-close-btn {
+  position: absolute;
+  top: 32px;
+  right: 32px;
+  background-color: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.1);
+  color: var(--text-muted);
+}
+.overlay-close-btn:hover {
+  color: var(--text-white);
+  background-color: rgba(255, 255, 255, 0.15);
+}
+.overlay-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 40px;
+  max-width: 600px;
+  padding: 24px;
+  text-align: center;
+}
+.overlay-timer-circle {
+  width: 320px;
+  height: 320px;
+  border-radius: 50%;
+  border: 4px solid rgba(139, 92, 246, 0.15);
+  box-shadow: 0 0 40px rgba(139, 92, 246, 0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(15, 23, 42, 0.3);
+  animation: breatheBorder 4s infinite ease-in-out;
+}
+@keyframes breatheBorder {
+  0% { border-color: rgba(139, 92, 246, 0.15); box-shadow: 0 0 30px rgba(139, 92, 246, 0.05); }
+  50% { border-color: rgba(6, 182, 212, 0.3); box-shadow: 0 0 60px rgba(6, 182, 212, 0.15); }
+  100% { border-color: rgba(139, 92, 246, 0.15); box-shadow: 0 0 30px rgba(139, 92, 246, 0.05); }
+}
+.overlay-timer-number {
+  font-family: var(--font-display);
+  font-size: 72px;
+  font-weight: 800;
+  color: var(--text-white);
+  letter-spacing: -0.02em;
+}
+.overlay-timer-label {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: var(--color-cyan);
+  font-weight: 700;
+}
+.focus-quote {
+  font-family: var(--font-display);
+  font-size: 20px;
+  font-weight: 400;
+  font-style: italic;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+.overlay-controls {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+.overlay-ambient-controls {
+  display: flex;
+  gap: 16px;
+}
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+/* Responsive adjustment */
+@media (max-width: 768px) {
+  .focus-mode-container {
+    grid-template-columns: 1fr;
+  }
+}
+.icon-small { font-size: 12px; }

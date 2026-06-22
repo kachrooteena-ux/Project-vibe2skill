@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FocusFlow AI - Proactive Productivity Companion</title>
+  <!-- SEO & Meta Tags -->
+  <meta name="description" content="FocusFlow AI is an intelligent productivity companion that proactively plans, prioritizes, and assists you in completing tasks before deadlines are missed.">
+  <meta name="theme-color" content="#0B0F19">
+  <!-- Google Fonts: Inter & Outfit -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <!-- App Stylesheets -->
+  <link rel="stylesheet" href="styles/main.css">
+  <link rel="stylesheet" href="styles/dashboard.css">
+  <link rel="stylesheet" href="styles/tasks.css">
+  <link rel="stylesheet" href="styles/calendar.css">
+  <link rel="stylesheet" href="styles/companion.css">
+  <link rel="stylesheet" href="styles/focus.css">
+</head>
+<body>
+  <!-- App Wrapper -->
+  <div class="app-container">
+    
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar" id="app-sidebar">
+      <div class="sidebar-brand">
+        <div class="brand-logo">
+          <i data-lucide="zap" class="logo-icon"></i>
+        </div>
+        <span class="brand-text">FocusFlow <span class="accent-text">AI</span></span>
+      </div>
+      <nav class="sidebar-nav">
+        <a href="#dashboard" class="nav-item active" data-target="dashboard" id="nav-dashboard">
+          <i data-lucide="layout-dashboard"></i>
+          <span>Dashboard</span>
+        </a>
+        <a href="#tasks" class="nav-item" data-target="tasks" id="nav-tasks">
+          <i data-lucide="check-square"></i>
+          <span>Tasks & Priorities</span>
+        </a>
+        <a href="#calendar" class="nav-item" data-target="calendar" id="nav-calendar">
+          <i data-lucide="calendar"></i>
+          <span>AI Scheduler</span>
+        </a>
+        <a href="#habits" class="nav-item" data-target="habits" id="nav-habits">
+          <i data-lucide="activity"></i>
+          <span>Habits & Goals</span>
+        </a>
+        <a href="#focus" class="nav-item" data-target="focus" id="nav-focus">
+          <i data-lucide="timer"></i>
+          <span>Focus Mode</span>
+        </a>
+        <a href="#settings" class="nav-item" data-target="settings" id="nav-settings">
+          <i data-lucide="settings"></i>
+          <span>Settings</span>
+        </a>
+      </nav>
+      <div class="sidebar-footer">
+        <div class="user-profile">
+          <div class="avatar" id="user-avatar-initial">U</div>
+          <div class="user-info">
+            <span class="user-name" id="profile-name">Productive User</span>
+            <span class="user-status" id="profile-status">Level 1 Planner</span>
+          </div>
+        </div>
+      </div>
+    </aside>
+    <!-- Main Content Container -->
+    <main class="main-content">
+      
+      <!-- Top header bar -->
+      <header class="app-header">
+        <div class="header-left">
+          <button class="mobile-menu-toggle" id="menu-toggle" aria-label="Toggle Navigation">
+            <i data-lucide="menu"></i>
+          </button>
+          <h1 class="page-title" id="current-page-title">Dashboard</h1>
+        </div>
+        <div class="header-right">
+          <div class="time-widget" id="header-time-widget">
+            <i data-lucide="clock"></i>
+            <span id="live-clock">12:00 PM</span>
+          </div>
+          <div class="focus-score-badge" id="focus-score-btn" title="Focus Score (Click to view Focus Mode)">
+            <i data-lucide="award"></i>
+            <span>Focus Score: <strong id="header-focus-score">0</strong></span>
+          </div>
+        </div>
+      </header>
+      <!-- View Containers -->
+      <div class="view-content">
+        <!-- 1. DASHBOARD VIEW -->
+        <section id="view-dashboard" class="app-view active-view">
+          <div class="dashboard-grid">
+            
+            <!-- Proactive Companion Feed -->
+            <div class="dashboard-col span-2 card proactive-card">
+              <div class="card-header">
+                <h2 class="card-title"><i data-lucide="sparkles" class="text-indigo"></i> Proactive AI Feed</h2>
+                <span class="badge badge-accent">Live Insights</span>
+              </div>
+              <div class="proactive-feed" id="proactive-feed-container">
+                <!-- AI dynamic recommendations will be injected here -->
+                <div class="feed-placeholder">
+                  <div class="spinner-small"></div>
+                  <p>AI is scanning your commitments & deadlines...</p>
+                </div>
+              </div>
+            </div>
+            <!-- Focus Meter -->
+            <div class="dashboard-col card focus-meter-card">
+              <div class="card-header">
+                <h2 class="card-title">Daily Focus Meter</h2>
+              </div>
+              <div class="focus-meter-content">
+                <div class="progress-ring-container">
+                  <svg class="progress-ring" width="160" height="160">
+                    <circle class="progress-ring-circle-bg" stroke="#1E293B" stroke-width="12" fill="transparent" r="70" cx="80" cy="80"/>
+                    <circle class="progress-ring-circle" id="dashboard-progress-ring" stroke="url(#progress-gradient)" stroke-width="12" stroke-dasharray="439.82" stroke-dashoffset="439.82" fill="transparent" r="70" cx="80" cy="80"/>
+                    <defs>
+                      <linearGradient id="progress-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stop-color="#06B6D4" />
+                        <stop offset="100%" stop-color="#8B5CF6" />
+                      </linearGradient>
+                    </defs>
+                  </svg>
+                  <div class="progress-ring-text">
+                    <span id="focus-percentage">0%</span>
+                    <span class="label">Completed</span>
+                  </div>
+                </div>
+                <div class="focus-stats">
+                  <div class="stat-item">
+                    <span class="stat-num" id="stat-completed-tasks">0/0</span>
+                    <span class="stat-label">Tasks Done</span>
+                  </div>
+                  <div class="stat-item border-left">
+                    <span class="stat-num" id="stat-focus-time">0m</span>
+                    <span class="stat-label">Focus Time</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- Immediate Agenda / Action Needed -->
+            <div class="dashboard-col span-2 card agenda-card">
+              <div class="card-header">
+                <h2 class="card-title"><i data-lucide="alert-circle" class="text-rose"></i> Next Critical Actions</h2>
+                <button class="btn btn-sm btn-outline" id="dash-schedule-next-btn">
+                  <i data-lucide="play"></i> Auto-Schedule
+                </button>
+              </div>
+              <div class="agenda-list" id="dashboard-agenda-list">
+                <!-- Actionable items list -->
+              </div>
+            </div>
+            <!-- Habits & Mini-Goals Tracker -->
+            <div class="dashboard-col card habits-widget-card">
+              <div class="card-header">
+                <h2 class="card-title">Daily Habits</h2>
+                <a href="#habits" class="text-link">Manage</a>
+              </div>
+              <div class="habits-mini-list" id="dashboard-habits-list">
+                <!-- Habits with quick checkboxes -->
+              </div>
+            </div>
+          </div>
+        </section>
+        <!-- 2. TASKS VIEW -->
+        <section id="view-tasks" class="app-view">
+          <div class="tasks-layout">
+            
+            <!-- Controls & Add Panel -->
+            <div class="tasks-toolbar">
+              <div class="search-filter-group">
+                <div class="search-wrapper">
+                  <i data-lucide="search" class="search-icon"></i>
+                  <input type="text" id="task-search-input" placeholder="Search tasks...">
+                </div>
+                <select id="task-category-filter" class="form-select">
+                  <option value="all">All Categories</option>
+                  <option value="work">Work</option>
+                  <option value="study">Study</option>
+                  <option value="personal">Personal</option>
+                  <option value="finance">Finance</option>
+                  <option value="health">Health</option>
+                </select>
+              </div>
+              <div class="action-group">
+                <button class="btn btn-primary" id="open-new-task-modal">
+                  <i data-lucide="plus"></i> Add Task
+                </button>
+              </div>
+            </div>
+            <!-- Task Display Tab Options -->
+            <div class="tabs-navigation">
+              <button class="tab-btn active" data-tab="list-view">List View</button>
+              <button class="tab-btn" data-tab="matrix-view">Eisenhower Matrix</button>
+            </div>
+            <!-- Tab Content 1: List View -->
+            <div class="tab-pane active-pane" id="tasks-list-view">
+              <div class="task-sections">
+                
+                <div class="task-section">
+                  <h3 class="section-title">Critical & Overdue <span class="badge badge-rose" id="count-overdue">0</span></h3>
+                  <div class="tasks-list" id="tasks-overdue-list"></div>
+                </div>
+                <div class="task-section">
+                  <h3 class="section-title">Active Planner <span class="badge badge-indigo" id="count-active">0</span></h3>
+                  <div class="tasks-list" id="tasks-active-list"></div>
+                </div>
+                <div class="task-section">
+                  <h3 class="section-title">Recently Completed <span class="badge badge-green" id="count-completed">0</span></h3>
+                  <div class="tasks-list" id="tasks-completed-list"></div>
+                </div>
+              </div>
+            </div>
+            <!-- Tab Content 2: Eisenhower Matrix -->
+            <div class="tab-pane" id="tasks-matrix-view">
+              <div class="matrix-grid">
+                
+                <!-- Q1: Urgent & Important -->
+                <div class="matrix-quadrant quad-q1">
+                  <div class="quadrant-header font-bold text-rose">
+                    <span>Q1: DO IMMEDIATELY</span>
+                    <span class="badge bg-rose-trans font-medium">Urgent & Important</span>
+                  </div>
+                  <div class="quadrant-body" id="matrix-q1-body"></div>
+                </div>
+                <!-- Q2: Not Urgent & Important -->
+                <div class="matrix-quadrant quad-q2">
+                  <div class="quadrant-header font-bold text-indigo">
+                    <span>Q2: SCHEDULE / DECIDE</span>
+                    <span class="badge bg-indigo-trans font-medium">Important, Not Urgent</span>
+                  </div>
+                  <div class="quadrant-body" id="matrix-q2-body"></div>
+                </div>
+                <!-- Q3: Urgent & Not Important -->
+                <div class="matrix-quadrant quad-q3">
+                  <div class="quadrant-header font-bold text-cyan">
+                    <span>Q3: DELEGATE / AUTOMATE</span>
+                    <span class="badge bg-cyan-trans font-medium">Urgent, Not Important</span>
+                  </div>
+                  <div class="quadrant-body" id="matrix-q3-body"></div>
+                </div>
+                <!-- Q4: Not Urgent & Not Important -->
+                <div class="matrix-quadrant quad-q4">
+                  <div class="quadrant-header font-bold text-slate">
+                    <span>Q4: ELIMINATE / POSTPONE</span>
+                    <span class="badge bg-slate-trans font-medium">Not Urgent or Important</span>
+                  </div>
+                  <div class="quadrant-body" id="matrix-q4-body"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        <!-- 3. CALENDAR & AUTO-SCHEDULER VIEW -->
+        <section id="view-calendar" class="app-view">
+          <div class="calendar-layout">
+            
+            <div class="calendar-sidebar">
+              <div class="card auto-scheduler-card">
+                <h3><i data-lucide="cpu" class="text-cyan"></i> AI Auto-Scheduler</h3>
+                <p class="description">Automatically schedule your tasks within your designated working hours, avoiding events & conflicts.</p>
+                <div class="scheduler-settings">
+                  <div class="form-group">
+                    <label>Working Hours</label>
+                    <span class="badge" id="sched-settings-display">9:00 AM - 6:00 PM</span>
+                  </div>
+                  <div class="form-group">
+                    <label>Default Task Block</label>
+                    <select id="auto-sched-duration" class="form-select">
+                      <option value="30">30 minutes</option>
+                      <option value="60" selected>1 hour</option>
+                      <option value="90">1.5 hours</option>
+                      <option value="120">2 hours</option>
+                    </select>
+                  </div>
+                </div>
+                <button class="btn btn-primary btn-full" id="run-auto-scheduler">
+                  <i data-lucide="sparkles"></i> Run AI Auto-Scheduler
+                </button>
+                <button class="btn btn-outline btn-full mt-2" id="clear-ai-schedule">
+                  <i data-lucide="trash-2"></i> Clear AI Schedule
+                </button>
+              </div>
+              <!-- Upcoming Scheduled blocks list -->
+              <div class="card scheduled-blocks-card mt-4">
+                <h3>Scheduled Time Blocks</h3>
+                <div class="scheduled-blocks-list" id="calendar-blocks-list">
+                  <!-- Time blocks list -->
+                </div>
+              </div>
+            </div>
+            <!-- Calendar Display Panel -->
+            <div class="calendar-panel card">
+              <div class="calendar-header-bar">
+                <div class="calendar-nav-buttons">
+                  <button class="btn btn-icon" id="cal-prev-btn"><i data-lucide="chevron-left"></i></button>
+                  <h2 id="calendar-month-year">June 2026</h2>
+                  <button class="btn btn-icon" id="cal-next-btn"><i data-lucide="chevron-right"></i></button>
+                </div>
+                <div class="calendar-view-toggle">
+                  <button class="tab-btn active" data-cal-view="month">Month</button>
+                  <button class="tab-btn" data-cal-view="week">Week</button>
+                </div>
+              </div>
+              <!-- Month View Grid -->
+              <div class="calendar-grid-container" id="calendar-month-grid-container">
+                <div class="weekdays-row">
+                  <div>Sun</div><div>Mon</div><div>Tue</div><div>Wed</div><div>Thu</div><div>Fri</div><div>Sat</div>
+                </div>
+                <div class="calendar-days-grid" id="calendar-month-days"></div>
+              </div>
+              <!-- Week View Grid -->
+              <div class="calendar-grid-container hidden" id="calendar-week-grid-container">
+                <div class="week-header-row" id="calendar-week-headers">
+                  <!-- Dynamically populated headers (e.g. Mon 22) -->
+                </div>
+                <div class="week-scroll-container">
+                  <div class="week-timeline-grid" id="calendar-week-timeline">
+                    <!-- Hours and events layout -->
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        <!-- 4. HABITS & GOALS VIEW -->
+        <section id="view-habits" class="app-view">
+          <div class="habits-layout">
+            
+            <!-- Goals Section -->
+            <div class="goals-container card">
+              <div class="card-header">
+                <h2><i data-lucide="target" class="text-rose"></i> Productivity Goals</h2>
+                <button class="btn btn-sm btn-primary" id="add-goal-btn">
+                  <i data-lucide="plus"></i> Add Goal
+                </button>
+              </div>
+              <div class="goals-grid" id="goals-list-container">
+                <!-- Goals injected here -->
+              </div>
+            </div>
+            <!-- Habits Section -->
+            <div class="habits-container card mt-6">
+              <div class="card-header">
+                <h2><i data-lucide="check-circle-2" class="text-green"></i> Daily Habits & Streaks</h2>
+                <button class="btn btn-sm btn-primary" id="add-habit-btn">
+                  <i data-lucide="plus"></i> Add Habit
+                </button>
+              </div>
+              <div class="habits-grid" id="habits-list-container">
+                <!-- Habits injected here -->
+              </div>
+            </div>
+          </div>
+        </section>
+        <!-- 5. FOCUS MODE VIEW -->
+        <section id="view-focus" class="app-view">
+          <div class="focus-mode-container">
+            
+            <div class="focus-timer-card card">
+              <div class="pomodoro-tabs">
+                <button class="pomodoro-tab-btn active" data-duration="25" data-mode="focus">Work Focus (25m)</button>
+                <button class="pomodoro-tab-btn" data-duration="5" data-mode="short-break">Short Break (5m)</button>
+                <button class="pomodoro-tab-btn" data-duration="15" data-mode="long-break">Long Break (15m)</button>
+              </div>
+              <!-- Timer Display -->
+              <div class="timer-display">
+                <svg class="timer-progress-ring" width="260" height="260">
+                  <circle class="timer-ring-bg" stroke="#1E293B" stroke-width="8" fill="transparent" r="110" cx="130" cy="130"/>
+                  <circle class="timer-ring-active" id="timer-progress-bar" stroke="#8B5CF6" stroke-width="8" stroke-dasharray="691.15" stroke-dashoffset="0" fill="transparent" r="110" cx="130" cy="130"/>
+                </svg>
+                <div class="timer-text-overlay">
+                  <span id="timer-time-left">25:00</span>
+                  <span id="timer-status-label" class="label text-indigo">Deep Flow</span>
+                </div>
+              </div>
+              <!-- Controls -->
+              <div class="timer-controls-row">
+                <button class="btn btn-icon btn-lg" id="timer-toggle-btn" title="Start/Pause Timer">
+                  <i data-lucide="play" id="timer-toggle-icon"></i>
+                </button>
+                <button class="btn btn-icon btn-lg btn-danger" id="timer-reset-btn" title="Reset Timer">
+                  <i data-lucide="refresh-cw"></i>
+                </button>
+                <button class="btn btn-icon btn-lg btn-outline" id="fullscreen-focus-btn" title="Enter Fullscreen Focus">
+                  <i data-lucide="maximize-2"></i>
+                </button>
+              </div>
+            </div>
+            <!-- Web Audio Sound Synthesizer Controls -->
+            <div class="focus-sound-card card">
+              <h2><i data-lucide="headphones" class="text-cyan"></i> Synthesized Soundscapes</h2>
+              <p class="description">Locally synthesized audio engineered for flow states. Put on headphones and trigger low-latency white noise or binaural frequencies.</p>
+              
+              <div class="soundscape-list">
+                
+                <!-- Sound Option 1: Deep Rain -->
+                <div class="soundscape-item">
+                  <div class="soundscape-details">
+                    <span class="title">Synthesized Deep Rain</span>
+                    <span class="subtitle">Pink noise rain simulation</span>
+                  </div>
+                  <div class="soundscape-actions">
+                    <input type="range" class="sound-volume" id="volume-rain" min="0" max="100" value="50" disabled>
+                    <button class="btn btn-icon btn-outline btn-sm sound-play-toggle" data-sound="rain">
+                      <i data-lucide="play"></i>
+                    </button>
+                  </div>
+                </div>
+                <!-- Sound Option 2: Focus Hum (Binaural Beats) -->
+                <div class="soundscape-item">
+                  <div class="soundscape-details">
+                    <span class="title">Binaural Alpha Waves</span>
+                    <span class="subtitle">Focus entrainment hum (10Hz alpha)</span>
+                  </div>
+                  <div class="soundscape-actions">
+                    <input type="range" class="sound-volume" id="volume-binaural" min="0" max="100" value="50" disabled>
+                    <button class="btn btn-icon btn-outline btn-sm sound-play-toggle" data-sound="binaural">
+                      <i data-lucide="play"></i>
+                    </button>
+                  </div>
+                </div>
+                <!-- Sound Option 3: Forest Breeze -->
+                <div class="soundscape-item">
+                  <div class="soundscape-details">
+                    <span class="title">Forest Breeze</span>
+                    <span class="subtitle">Warm wind synthesis</span>
+                  </div>
+                  <div class="soundscape-actions">
+                    <input type="range" class="sound-volume" id="volume-breeze" min="0" max="100" value="50" disabled>
+                    <button class="btn btn-icon btn-outline btn-sm sound-play-toggle" data-sound="breeze">
+                      <i data-lucide="play"></i>
+                    </button>
+                  </div>
+                </div>
+              </div>
+              
+              <div class="audio-notice">
+                <i data-lucide="info" class="icon-small text-cyan"></i> Uses the browser Web Audio API. Zero streaming bandwidth required.
+              </div>
+            </div>
+          </div>
+        </section>
+        <!-- 6. SETTINGS VIEW -->
+        <section id="view-settings" class="app-view">
+          <div class="settings-layout">
+            <div class="card settings-card">
+              <h2>User Preferences</h2>
+              <form id="settings-form">
+                
+                <div class="form-row">
+                  <div class="form-group">
+                    <label for="settings-name">Full Name</label>
+                    <input type="text" id="settings-name" class="form-control" value="Productive User" required>
+                  </div>
+                  <div class="form-group">
+                    <label for="settings-role">Focus Role / Title</label>
+                    <input type="text" id="settings-role" class="form-control" value="Student & Builder">
+                  </div>
+                </div>
+                <div class="form-row mt-4">
+                  <div class="form-group">
+                    <label for="settings-work-start">Working Hours Start</label>
+                    <input type="time" id="settings-work-start" class="form-control" value="09:00">
+                  </div>
+                  <div class="form-group">
+                    <label for="settings-work-end">Working Hours End</label>
+                    <input type="time" id="settings-work-end" class="form-control" value="18:00">
+                  </div>
+                </div>
+                <div class="form-group mt-4">
+                  <label for="settings-focus-goal">Weekly Focus Goal (hours)</label>
+                  <input type="number" id="settings-focus-goal" class="form-control" value="15" min="1" max="100">
+                </div>
+                <div class="form-actions mt-6">
+                  <button type="submit" class="btn btn-primary">Save Profile Settings</button>
+                </div>
+              </form>
+            </div>
+            <!-- API Configuration -->
+            <div class="card settings-card mt-6">
+              <h2><i data-lucide="cpu" class="text-indigo"></i> Gemini AI Studio Configuration</h2>
+              <p class="description">Connecting your own API key enables advanced deep-reasoning scheduling assistance, natural conversation, and custom subtask decomposition.</p>
+              
+              <div class="form-group mt-4">
+                <label for="settings-api-key">Google Gemini API Key</label>
+                <div class="api-key-input-wrapper">
+                  <input type="password" id="settings-api-key" class="form-control" placeholder="AIzaSy...">
+                  <button class="btn btn-icon btn-outline" id="toggle-api-key-visibility" type="button">
+                    <i data-lucide="eye"></i>
+                  </button>
+                </div>
+                <small class="form-help text-slate">Key is saved securely in your browser's local storage and never leaves your computer.</small>
+              </div>
+              <div class="form-row mt-4 align-center">
+                <span class="status-indicator-label">AI Engine Mode:</span>
+                <span class="badge" id="ai-engine-status-badge">Local Heuristic Simulator</span>
+              </div>
+              <div class="form-actions mt-4">
+                <button class="btn btn-primary" id="save-api-key-btn">Save API Configuration</button>
+                <button class="btn btn-outline text-rose border-rose" id="clear-api-key-btn">Remove Key</button>
+              </div>
+            </div>
+            <!-- Data Management -->
+            <div class="card settings-card mt-6 border-danger-dim">
+              <h2 class="text-rose">Danger Zone</h2>
+              <p class="description">Warning: resetting your data clears all stored tasks, habits, schedules, and custom settings permanently.</p>
+              <div class="form-actions mt-4">
+                <button class="btn btn-danger" id="reset-app-data-btn">Reset All Stored Data</button>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </main>
+  </div>
+  <!-- FLOATING AI COMPANION CONTAINER -->
+  <div class="companion-widget-wrapper" id="companion-floating-widget">
+    <div class="companion-avatar" id="companion-avatar-trigger" title="Speak to your AI companion">
+      <div class="avatar-ring pulse-slow"></div>
+      <div class="avatar-ring pulse-fast"></div>
+      <div class="avatar-core">
+        <i data-lucide="sparkles" class="companion-icon"></i>
+      </div>
+    </div>
+    
+    <!-- Pulse indicators for active processing -->
+    <div class="companion-speaking-waves hidden" id="companion-voice-waves">
+      <span></span><span></span><span></span><span></span>
+    </div>
+  </div>
+  <!-- AI COMPANION CHAT DRAWER -->
+  <div class="companion-drawer" id="companion-chat-drawer">
+    <div class="drawer-header">
+      <div class="drawer-title-group">
+        <div class="glowing-indicator" id="companion-status-indicator"></div>
+        <div>
+          <h3>Companion Assistant</h3>
+          <span class="status-text" id="companion-status-text">Online</span>
+        </div>
+      </div>
+      <button class="btn btn-icon btn-sm btn-outline" id="close-companion-drawer">
+        <i data-lucide="x"></i>
+      </button>
+    </div>
+    <!-- Conversations Message list -->
+    <div class="drawer-messages" id="companion-messages-container">
+      <div class="message system-message">
+        <p>👋 Hello! I am your FocusFlow AI assistant. I can schedule tasks, break down complex goals, track habits, or check your timeline. Try typing a request, or click the mic to speak to me.</p>
+      </div>
+    </div>
+    <!-- Assistant input row -->
+    <div class="drawer-input-area">
+      <div class="drawer-input-row">
+        <button class="btn btn-icon btn-outline" id="companion-voice-btn" title="Toggle Voice Recognition (Speech-to-Text)">
+          <i data-lucide="mic"></i>
+        </button>
+        <textarea id="companion-text-input" rows="1" placeholder="Ask AI to plan, reschedule..."></textarea>
+        <button class="btn btn-icon btn-primary" id="companion-send-btn" title="Send message">
+          <i data-lucide="send"></i>
+        </button>
+      </div>
+      <div class="drawer-controls">
+        <label class="toggle-switch">
+          <input type="checkbox" id="toggle-voice-response">
+          <span class="toggle-slider"></span>
+          <span class="toggle-label"><i data-lucide="volume-2" class="icon-small"></i> AI Speaks Back</span>
+        </label>
+      </div>
+    </div>
+  </div>
+  <!-- FULLSCREEN FOCUS OVERLAY (IMMERSIVE CONCENTRATION) -->
+  <div class="fullscreen-focus-overlay hidden" id="fullscreen-focus-overlay">
+    <button class="btn btn-icon overlay-close-btn" id="exit-fullscreen-focus" title="Exit Focus Mode">
+      <i data-lucide="minimize-2"></i>
+    </button>
+    
+    <div class="overlay-content">
+      <div class="overlay-timer-circle">
+        <span class="overlay-timer-number" id="overlay-time-display">25:00</span>
+        <span class="overlay-timer-label" id="overlay-status-display">STAY FOCUSED</span>
+      </div>
+      <h2 class="focus-quote" id="overlay-focus-quote">"Focus is a muscle, and you are building it right now."</h2>
+      
+      <!-- Quick toggle panel for synth sounds during fullscreen focus -->
+      <div class="overlay-controls">
+        <button class="btn btn-outline btn-lg" id="overlay-timer-toggle">
+          <i data-lucide="play" id="overlay-toggle-icon"></i> Pause Session
+        </button>
+        
+        <div class="overlay-ambient-controls">
+          <button class="btn btn-icon btn-outline btn-lg sound-overlay-toggle" data-sound="rain" title="Toggle Rain Sound">
+            <i data-lucide="cloud-rain"></i>
+          </button>
+          <button class="btn btn-icon btn-outline btn-lg sound-overlay-toggle" data-sound="binaural" title="Toggle Binaural Hum">
+            <i data-lucide="waves"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- NEW TASK / EDIT TASK MODAL -->
+  <div class="modal-backdrop hidden" id="task-modal">
+    <div class="modal card">
+      <div class="modal-header">
+        <h2 id="modal-task-title">Create New Task</h2>
+        <button class="btn btn-icon btn-sm btn-outline" id="close-task-modal"><i data-lucide="x"></i></button>
+      </div>
+      <form id="task-form">
+        <input type="hidden" id="task-edit-id">
+        
+        <div class="form-group">
+          <label for="task-title-input">Task Title</label>
+          <input type="text" id="task-title-input" class="form-control" placeholder="e.g., Study Organic Chemistry" required>
+        </div>
+        <div class="form-group mt-4">
+          <label for="task-desc-input">Description / Notes</label>
+          <textarea id="task-desc-input" class="form-control" rows="2" placeholder="Describe the task or list key goals..."></textarea>
+        </div>
+        <div class="form-row mt-4">
+          <div class="form-group">
+            <label for="task-due-date">Due Date & Time</label>
+            <input type="datetime-local" id="task-due-date" class="form-control" required>
+          </div>
+          <div class="form-group">
+            <label for="task-category">Category</label>
+            <select id="task-category" class="form-select">
+              <option value="work">Work</option>
+              <option value="study" selected>Study</option>
+              <option value="personal">Personal</option>
+              <option value="finance">Finance</option>
+              <option value="health">Health</option>
+            </select>
+          </div>
+        </div>
+        <!-- Priority Matrix Input -->
+        <div class="form-row mt-4">
+          <div class="form-group flex-row align-center gap-2">
+            <input type="checkbox" id="task-important" class="form-checkbox">
+            <label for="task-important" class="label-inline font-medium">Important (high impact goal)</label>
+          </div>
+          <div class="form-group flex-row align-center gap-2">
+            <input type="checkbox" id="task-urgent" class="form-checkbox">
+            <label for="task-urgent" class="label-inline font-medium">Urgent (imminent deadline)</label>
+          </div>
+        </div>
+        <div class="form-group mt-4">
+          <label for="task-duration-est">Estimated Duration (minutes)</label>
+          <input type="number" id="task-duration-est" class="form-control" value="60" min="5" max="480">
+        </div>
+        <div class="form-actions mt-6">
+          <button type="button" class="btn btn-outline" id="btn-cancel-task">Cancel</button>
+          <button type="submit" class="btn btn-primary" id="btn-save-task">Create Task</button>
+        </div>
+      </form>
+    </div>
+  </div>
+  <!-- ADD HABIT / GOAL MODAL -->
+  <div class="modal-backdrop hidden" id="habit-modal">
+    <div class="modal card">
+      <div class="modal-header">
+        <h2 id="modal-habit-title">Add New Habit</h2>
+        <button class="btn btn-icon btn-sm btn-outline" id="close-habit-modal"><i data-lucide="x"></i></button>
+      </div>
+      <form id="habit-form">
+        <input type="hidden" id="habit-edit-id">
+        <input type="hidden" id="habit-type" value="habit"> <!-- habit or goal -->
+        
+        <div class="form-group">
+          <label for="habit-name-input" id="lbl-habit-name">Habit Name</label>
+          <input type="text" id="habit-name-input" class="form-control" placeholder="e.g., Read 15 pages" required>
+        </div>
+        <div id="habit-fields-only">
+          <div class="form-group mt-4">
+            <label for="habit-frequency">Frequency</label>
+            <select id="habit-frequency" class="form-select">
+              <option value="daily">Daily</option>
+              <option value="weekly">Weekly (3x/week)</option>
+            </select>
+          </div>
+          <div class="form-group mt-4">
+            <label for="habit-category">Goal Category</label>
+            <select id="habit-category" class="form-select">
+              <option value="Work">Work</option>
+              <option value="Study">Study</option>
+              <option value="Health" selected>Health</option>
+              <option value="Finance">Finance</option>
+              <option value="Personal">Personal</option>
+            </select>
+          </div>
+        </div>
+        <div id="goal-fields-only" class="hidden">
+          <div class="form-group mt-4">
+            <label for="goal-target-date">Target Completion Date</label>
+            <input type="date" id="goal-target-date" class="form-control">
+          </div>
+        </div>
+        <div class="form-actions mt-6">
+          <button type="button" class="btn btn-outline" id="btn-cancel-habit">Cancel</button>
+          <button type="submit" class="btn btn-primary" id="btn-save-habit">Save</button>
+        </div>
+      </form>
+    </div>
+  </div>
+  <!-- TOAST NOTIFICATION CONTAINER -->
+  <div class="toast-container" id="toast-container"></div>
+  <!-- App Main Scripts -->
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>

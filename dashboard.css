@@ -1,0 +1,317 @@
+/* -------------------------------------------------------------
+ * DASHBOARD VIEW STYLES - FocusFlow AI
+ * Layout grid, Proactive AI Feed cards, radial progress rings,
+ * quick agenda timelines, and habit list modules.
+ * ------------------------------------------------------------- */
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+.dashboard-col.span-2 {
+  grid-column: span 2;
+}
+/* Proactive AI Feed Cards */
+.proactive-feed {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  max-height: 380px;
+  overflow-y: auto;
+  padding-right: 4px;
+}
+.feed-placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 0;
+  color: var(--text-muted);
+  gap: 12px;
+}
+.spinner-small {
+  width: 20px;
+  height: 20px;
+  border: 2px solid rgba(6, 182, 212, 0.1);
+  border-top-color: var(--color-cyan);
+  border-radius: 50%;
+  animation: spin 1s infinite linear;
+}
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+.proactive-item {
+  background: rgba(15, 23, 42, 0.4);
+  border: 1px solid var(--border-color);
+  border-left: 4px solid var(--color-violet);
+  border-radius: var(--border-radius);
+  padding: 16px;
+  display: flex;
+  gap: 16px;
+  transition: var(--transition-smooth);
+  animation: slideIn 0.3s ease-out;
+}
+.proactive-item:hover {
+  border-color: rgba(139, 92, 246, 0.4);
+  transform: translateX(4px);
+}
+.proactive-item.alert-urgency {
+  border-left-color: var(--color-rose);
+}
+.proactive-item.alert-habit {
+  border-left-color: var(--color-emerald);
+}
+.proactive-icon-wrapper {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: rgba(30, 41, 59, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.proactive-icon-wrapper i {
+  width: 18px;
+  height: 18px;
+}
+.proactive-content {
+  flex-grow: 1;
+}
+.proactive-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-white);
+  margin-bottom: 4px;
+}
+.proactive-desc {
+  font-size: 13px;
+  color: var(--text-muted);
+  line-height: 1.4;
+  margin-bottom: 12px;
+}
+.proactive-actions {
+  display: flex;
+  gap: 8px;
+}
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+/* Daily Focus Meter */
+.focus-meter-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: calc(100% - 40px);
+  min-height: 240px;
+}
+.progress-ring-container {
+  position: relative;
+  width: 160px;
+  height: 160px;
+  margin-bottom: 20px;
+}
+.progress-ring {
+  transform: rotate(-90deg);
+}
+.progress-ring-circle {
+  transition: stroke-dashoffset 0.6s ease;
+}
+.progress-ring-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+#focus-percentage {
+  font-family: var(--font-display);
+  font-size: 28px;
+  font-weight: 800;
+  color: var(--text-white);
+}
+.progress-ring-text .label {
+  font-size: 10px;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  letter-spacing: 0.05em;
+}
+.focus-stats {
+  display: flex;
+  width: 100%;
+  justify-content: space-around;
+  margin-top: 10px;
+}
+.stat-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-grow: 1;
+}
+.stat-item.border-left {
+  border-left: 1px solid var(--border-color);
+}
+.stat-num {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--text-white);
+}
+.stat-label {
+  font-size: 11px;
+  color: var(--text-muted);
+  margin-top: 4px;
+}
+/* Next Critical Actions / Agenda List */
+.agenda-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-height: 300px;
+  overflow-y: auto;
+}
+.agenda-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 16px;
+  background-color: rgba(15, 23, 42, 0.4);
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius);
+  transition: var(--transition-smooth);
+}
+.agenda-item:hover {
+  background-color: rgba(30, 41, 59, 0.4);
+  border-color: var(--border-color-hover);
+}
+.agenda-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.agenda-check-btn {
+  background: none;
+  border: none;
+  color: var(--text-slate);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: var(--transition-smooth);
+}
+.agenda-check-btn:hover {
+  color: var(--color-cyan);
+}
+.agenda-check-btn i {
+  width: 20px;
+  height: 20px;
+}
+.agenda-details {
+  display: flex;
+  flex-direction: column;
+}
+.agenda-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-white);
+}
+.agenda-meta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 4px;
+}
+.agenda-time {
+  font-size: 12px;
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+.agenda-time i {
+  width: 12px;
+  height: 12px;
+}
+.agenda-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+/* Daily Habits Quick Widget */
+.habits-mini-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  overflow-y: auto;
+  max-height: 280px;
+}
+.habit-mini-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px;
+  background-color: rgba(30, 41, 59, 0.3);
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius);
+}
+.habit-mini-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 13px;
+  font-weight: 500;
+}
+.habit-mini-checkbox {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  border: 2px solid var(--text-slate);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: var(--transition-smooth);
+}
+.habit-mini-checkbox.completed {
+  background-color: var(--color-emerald);
+  border-color: var(--color-emerald);
+}
+.habit-mini-checkbox i {
+  width: 12px;
+  height: 12px;
+  color: var(--text-white);
+  display: none;
+}
+.habit-mini-checkbox.completed i {
+  display: block;
+}
+.habit-streak-badge {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 11px;
+  color: var(--color-amber);
+}
+.habit-streak-badge i {
+  width: 12px;
+  height: 12px;
+  fill: var(--color-amber);
+}
+/* Responsive columns */
+@media (max-width: 1024px) {
+  .dashboard-grid {
+    grid-template-columns: 1fr;
+  }
+  .dashboard-col.span-2 {
+    grid-column: span 1;
+  }
+}

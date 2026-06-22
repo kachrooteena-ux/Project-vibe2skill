@@ -1,0 +1,22 @@
+{
+  "name": "focusflow-ai",
+  "version": "1.0.0",
+  "description": "Proactive AI-powered productivity companion built with HTML, Vanilla CSS, and ES Modules, featuring Web Audio synthesis, voice assistance, and direct Gemini API integration.",
+  "main": "index.html",
+  "scripts": {
+    "start": "npx -y sirv-cli . --port 3000 --cors --single"
+  },
+  "keywords": [
+    "productivity",
+    "ai",
+    "scheduler",
+    "pomodoro",
+    "web-audio-api",
+    "speech-recognition"
+  ],
+  "author": "Developer",
+  "license": "MIT",
+  "devDependencies": {
+    "sirv-cli": "^2.0.2"
+  }
+}
